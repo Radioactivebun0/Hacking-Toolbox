@@ -7,10 +7,15 @@ from discord.ext import commands
 import asyncio
 import requests
 from requests import post
+
+global autodm
+autodm = '1'
+
 def SpamSetUp():
     global inv
     global messagecount
     global messagesend
+    global thedm
     inv=input("what is the invite link (just the string of letters or enter nothing if they are already in): ")
 
     link = "https://discord.com/api/v6/invites/" + inv.split("/")[-1]
@@ -39,6 +44,10 @@ def SpamSetUp():
 
     messagesend = input("type what you want the bots to spam here: ")
 
+    thedm = input('What do you want the dm on message to be? ')
+    if thedm == '':
+        thedm = '👋 Why, hello there 👋'
+
 def randomletters(length):
     letters = string.ascii_letters
     return ''.join(random.choice(letters) for i in range(length))
@@ -55,21 +64,66 @@ class multibot(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self,message):
+        global autodm
+        global thedm
         await client.process_commands(message)
         print(message.content)
-        #triggerwords = ['hi', 'this', 'is', 'cool']
-        #for x in triggerwords:
-         #   if x in message.content:
-        try:
-            print('Sending the dm 👋 "Why, hello there 👋"...')
-            await message.author.send('👋 Why, hello there 👋')
-            print('Done')
-        except:
-            pass
-
+        if autodm == '1':
+            #triggerwords = ['hi', 'this', 'is', 'cool']
+            #for x in triggerwords:
+                #if x in message.content:
+                    try:
+                        print(f'Sending the dm: {thedm}')
+                        await message.author.send(thedm)
+        #user = client.get_user(748505602677932072)
+        #await user.send('👀')
+                        print('Done')
+                    except:
+                        pass
+              #  else:
+                    pass
 
     @commands.command()
-    async def spam(self,ctx):
+    async def spam(self,ctx,args1,args2):
+        x=0
+        for x in range(0,int(args2)):
+            asyncio.sleep(0.7)
+            print("sending message "+random.choice(string.ascii_letters))
+            try:
+                await ctx.send(args1)
+            except:
+                print("message error")
+                pass
+            x=x+1
+
+  #  @commands.command()
+   # async def dall(self,ctx, *, message):
+    #    for member in get_all_members():
+     #       #await member.send(message)
+      #      print(member)
+
+    @commands.command()
+    async def spamuser(self,ctx,args1,args2,args3): #formate -spamuser {message} {ammount of times} {userid}
+        x=0
+        try:
+            intargs2 = int(args2)
+            intargs3 = int(args3)
+        except:
+            ctx.send('The formate is: -spamuser {message} {ammount of times} {userid}')
+            return
+        for x in range(0,intargs2):
+            asyncio.sleep(0.7)
+            print("sending message "+random.choice(string.ascii_letters))
+            try:
+                user = client.get_user(intargs3)
+                await user.send(args1)#('👀')
+            except:
+                print("message error")
+                pass
+            x=x+1
+
+    @commands.command()
+    async def spamstart(self,ctx):
         global inv
         global messagecount
         global messagesend
@@ -102,11 +156,6 @@ class multibot(commands.Cog):
         for member in guild.members:
             print(f'user: {member} ping: {member.mention}')
             await ctx.send(member.mention)
-
-    @commands.command()
-    async def dmall(self, ctx, *, message):
-        for member in ctx.guild.members:
-            await member.send(message)
 
     @commands.command()
     async def stop(self,ctx):
