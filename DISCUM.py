@@ -2,7 +2,7 @@ import discum
 import time
 import os
 
-bot = discum.Client(token='NzY2NzU1NTM5MTIzMzA2NTQ4.X4n_Fg.g4UrMo7JSY4tDFak7ekIrle9jmU')
+bot = discum.Client(token='Discord Account Token')
 
 guildnum = 0
 
