@@ -1,6 +1,8 @@
 # Hacking-Toolbox
 This is in heavy work, it is constantly getting updated :)
 
+# This read me is outdated, ill update it as soon as possable
+
 Tools:
 
 main.py:
