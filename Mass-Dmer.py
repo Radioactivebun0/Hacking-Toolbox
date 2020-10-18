@@ -9,7 +9,7 @@ import requests
 from requests import post
 
 global autodm
-autodm = '1'
+autodm = '0'
 
 def SpamSetUp():
     global inv
