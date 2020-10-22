@@ -11,6 +11,9 @@ start the script
 the commands are:
 
 -nakoalt:
+
 shows tags
+
 -neko {tag}:
+
 gets the hentai  lol
