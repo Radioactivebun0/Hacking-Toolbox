@@ -9,7 +9,11 @@ import requests
 from requests import post
 
 global autodm
-autodm = '0'
+global ftime
+global stime
+stime = 0
+ftime = '0'
+autodm = '1'
 
 def SpamSetUp():
     global inv
@@ -66,8 +70,9 @@ class multibot(commands.Cog):
     async def on_message(self,message):
         global autodm
         global thedm
+        global ftime
         await client.process_commands(message)
-        print(message.content)
+        print(f'In {message.guild}, {message.author.name} sent: {message.content}')
         if autodm == '1':
             #triggerwords = ['hi', 'this', 'is', 'cool']
             #for x in triggerwords:
@@ -75,13 +80,14 @@ class multibot(commands.Cog):
                     try:
                         print(f'Sending the dm: {thedm}')
                         await message.author.send(thedm)
-        #user = client.get_user(748505602677932072)
-        #await user.send('👀')
+                        time.sleep(1)
                         print('Done')
                     except:
                         pass
               #  else:
-                    pass
+                   # pass
+        else:
+            return
 
     @commands.command()
     async def spam(self,ctx,args1,args2):
@@ -160,7 +166,17 @@ class multibot(commands.Cog):
     @commands.command()
     async def stop(self,ctx):
         exit(0)
-            
+
+async def timer():
+    global stime
+    print('This is a one sec delay')
+    if stime == 0:
+        return
+    else:
+        stime = stime - 1
+    await asyncio.sleep(1.5)
+    await timer()
+
 loop = asyncio.get_event_loop()
 for i in range(len(tokens)):
     global client
