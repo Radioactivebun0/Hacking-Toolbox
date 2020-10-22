@@ -13,7 +13,7 @@ global ftime
 global stime
 stime = 0
 ftime = '0'
-autodm = '1'
+autodm = '0'
 
 def SpamSetUp():
     global inv
