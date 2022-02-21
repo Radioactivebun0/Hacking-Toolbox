@@ -1,5 +1,6 @@
 # Hacking-Toolbox
-This is in heavy work, it is constantly getting updated :)
+
+# DUE TO DISCORD CHANGING THERE API, MANY OF THESE TOOLS NO LONGER WORK
 
 Tools:
 
